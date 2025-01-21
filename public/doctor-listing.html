@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Listing</title>
+  </head>
+  <body>
+    <h2>Doctor Listing</h2>
+    <div id="doctorList"></div>
+
+    <script>
+      async function fetchDoctors() {
+        const response = await fetch("/api/auth/doctors");
+        const doctors = await response.json();
+        const doctorListDiv = document.getElementById("doctorList");
+
+        doctors.forEach((doctor) => {
+          const doctorElement = document.createElement("div");
+          doctorElement.textContent = `Name: ${doctor.fullName}, Specialization: ${doctor.specialization}, Contact: ${doctor.contactNumber}, Email: ${doctor.email}`;
+          doctorListDiv.appendChild(doctorElement);
+        });
+      }
+
+      fetchDoctors();
+    </script>
+  </body>
+</html>
